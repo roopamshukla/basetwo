@@ -32,7 +32,7 @@ public class SignupServlet extends HttpServlet {
         int i=0;
        try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/login_form","root","godzilla");
+            Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/login_form","root","password");
             Statement s=c.createStatement();
             ResultSet rs=s.executeQuery("select * from user_form");
             while(rs.next())
@@ -76,7 +76,7 @@ public class SignupServlet extends HttpServlet {
          
               try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/login_form","root","godzilla");
+            Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/login_form","root","password");
             Statement s=c.createStatement();
             s.execute("insert into user_form values('"+uname+"','"+pwd+"')"); 
               } catch (ClassNotFoundException ex) {
