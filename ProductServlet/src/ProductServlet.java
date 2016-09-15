@@ -40,7 +40,7 @@ public class ProductServlet extends HttpServlet {
         int count=0;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/product_info","root","godzilla");
+            Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/product_info","root","password");
             Statement s=c.createStatement();
             ResultSet rs=s.executeQuery("select * from product_details");
             while(rs.next())
