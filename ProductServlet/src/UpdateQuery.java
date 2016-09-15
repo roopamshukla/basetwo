@@ -17,7 +17,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 
-public class ProductServlet extends HttpServlet {
+public class UpdateQuery extends HttpServlet {
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -28,8 +28,10 @@ public class ProductServlet extends HttpServlet {
         System.out.print(pid);*/
      
       
+      HttpSession ss =request.getSession(false);
+        
+      String pid=(String)ss.getAttribute("uname");
       
-      String pid=request.getParameter("uname");
     
         String pname=request.getParameter("pname");
         String des=request.getParameter("des");
@@ -47,17 +49,17 @@ public class ProductServlet extends HttpServlet {
             {
                 count++;
             }
-            String q="insert into product_details values(?,?,?,?,?,?,?)";
+            String q="update product_details set sno=?, pname=?, des=?, date=?, qty=?, price=? where pid=?";
             PreparedStatement ps=c.prepareStatement(q);
-            ps.setInt(1,count+1);
-            ps.setString(2,pid);
-            ps.setString(3,pname);
-            ps.setString(4,des);
-            ps.setString(5,date);
-            ps.setInt(6,qty);
-            ps.setInt(7,price);
+            ps.setInt(1,count);
+            ps.setString(2,pname);
+            ps.setString(3,des);
+            ps.setString(4,date);
+            ps.setInt(5,qty);
+            ps.setInt(6,price);
+            ps.setString(7,pid);
             
-            ps.execute();
+            ps.executeUpdate();
             
               } catch (ClassNotFoundException ex) {
             Logger.getLogger(ProductServlet.class.getName()).log(Level.SEVERE, null, ex);

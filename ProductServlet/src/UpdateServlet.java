@@ -17,18 +17,17 @@ import javax.servlet.http.HttpSession;
  *
  * @author roopamshukla
  */
-public class InputServlet extends HttpServlet {
+public class UpdateServlet extends HttpServlet {
 
    
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          
-        String uname=request.getParameter("pid");
-        String u=uname;
        // Cookie ck=new Cookie("uname",uname);
        // response.addCookie(ck);
-       HttpSession s= request.getSession(true);
-       s.setAttribute("uname", u);
+       HttpSession ss =request.getSession(false);
+        
+         String uname=(String)ss.getAttribute("uname");
         response.setContentType("text/html");
     PrintWriter pw = response.getWriter();
        pw.println("<!DOCTYPE>\n" +
@@ -45,7 +44,7 @@ public class InputServlet extends HttpServlet {
 "\n" +
 "                <div class=\"col-md-1\"></div>\n" +
 "                <div class=\"col-md-6\">\n" +
-"                    <h2 id=\"register\" >Enter Product Information (Update)</h2>\n" +
+"                    <h2 id=\"register\" >Enter Product Information</h2>\n" +
 "                    <form method=\"post\">\n" +
 "                        <label class=\"control-label\">Product ID</label>\n" +
 "                        <input class=\"form-control\" type=\"text\" name=\"pid\" value=\""+uname+"\" disabled></input>\n" +
@@ -59,9 +58,9 @@ public class InputServlet extends HttpServlet {
 "                        <input class=\"form-control\" type=\"text\" name=\"qty\" required></input>\n" +
 "                        <label class=\"control-label\">Price</label><tr><br>\n" +
 "                        <input class=\"form-control\" type=\"text\" name=\"price\" required></input><br>\n" +
-               "<input type='hidden' name='uname' value='"+u+"'/>" +
-"                        <center><button class=\"btn btn-primary\" formaction=\"ProductServlet\">Submit</button>\n" +
-"                        <button class=\"btn btn-danger\" formaction=\"check.html\" formnovalidate>Cancel</button></center>\n" +
+               "<input type='hidden' name='uname' value='"+uname+"'/>" +
+"                        <center><button class=\"btn btn-primary\" formaction=\"UpdateQuery\">Submit</button>\n" +
+"                        <button class=\"btn btn-danger\" formaction=\"DisplayExisting\" formnovalidate>Cancel</button></center>\n" +
 "                    </form>\n" +
 "                </div>\n" +
 "                <div class=\"col-md-4\"><br>\n" +

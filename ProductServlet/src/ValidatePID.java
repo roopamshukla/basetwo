@@ -19,6 +19,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -30,11 +31,14 @@ public class ValidatePID extends HttpServlet {
             throws ServletException, IOException {
         
          String pid[]=new String[100];
-         
+         String uname=request.getParameter("pid");
+         String u=uname;
+          HttpSession ss= request.getSession(true);
+       ss.setAttribute("uname", u);
         int i=0;
          try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/product_info","root","password");
+            Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/product_info","root","godzilla");
             Statement s=c.createStatement();
             ResultSet rs=s.executeQuery("select * from product_details");
             while(rs.next())
@@ -50,7 +54,7 @@ public class ValidatePID extends HttpServlet {
         }
          
          int status=0;
-        String uname=request.getParameter("pid");
+     //   String uname=request.getParameter("pid");
         for(int m=0;m<i;m++)
         {
             if(pid[m].equalsIgnoreCase(uname))

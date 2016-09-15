@@ -39,7 +39,7 @@ public class DisplayExisting extends HttpServlet {
         int i=0;
          try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/product_info","root","password");
+            Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/product_info","root","godzilla");
             Statement s=c.createStatement();
             ResultSet rs=s.executeQuery("select * from product_details");
             while(rs.next())
@@ -59,9 +59,12 @@ public class DisplayExisting extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(DisplayExisting.class.getName()).log(Level.SEVERE, null, ex);
         }
+         
         HttpSession ss =request.getSession(false);
         
          String uname=(String)ss.getAttribute("uname");
+         HttpSession hs= request.getSession(true);
+       hs.setAttribute("uname", uname);
          Cookie[] ck=request.getCookies();
          int m=0;
         for(m=0;m<i;m++)
@@ -104,7 +107,8 @@ public class DisplayExisting extends HttpServlet {
 "                        <input class=\"form-control\" type=\"text\" name=\"qty\" value=\""+qty[m]+"\" disabled></input>\n" +
 "                        <label class=\"control-label\">Price</label><tr><br>\n" +
 "                        <input class=\"form-control\" type=\"text\" name=\"price\" value=\""+price[m]+"\" disabled></input><br>\n" +
-"                        <center><button class=\"btn btn-success\" formaction=\"check.html\" formnovalidate>Back</button></center>\n" +
+"                        <center>"
+               + "<button class=\"btn btn-primary\" formaction=\"UpdateServlet\">Update</button>\n<button class=\"btn btn-success\" formaction=\"check.html\" formnovalidate>Back</button></center>\n" +
 "                    </form>\n" +
 "                </div>\n" +
 "                <div class=\"col-md-4\"><br>\n" +
