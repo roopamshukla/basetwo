@@ -1,2 +1,2 @@
-# basetwo
+# servlet-code
 Servlet code.
